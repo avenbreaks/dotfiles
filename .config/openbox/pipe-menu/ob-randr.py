@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
-
-# The script base is taken from http://openbox.org/wiki/Openbox:Pipemenus
-
 # -*- coding: utf-8 -*-
+# The script-base is taken from "http://openbox.org/wiki/Openbox:Pipemenus".
+# Modified by owl4ce and mochidaz.
 """A small utility to make xrandr adjustments from an OpenBox menu.
 
 To install, put this file somewhere and make sure it is executable.
