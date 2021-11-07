@@ -16,7 +16,7 @@ elif [ -x "$(command -v loginctl)" ]; then
     SEATCTL='loginctl'
 else
     # Send fails notification.
-    exec "$V_NOTIFIER" -r 82 -i "$LOCK_ICON" '' '<b>systemd-logind</b> or <b>elogind</b> not installed nor running!'
+    exec notify-send.sh -r 82 -i "$LOCK_ICON" '' '<b>systemd-logind</b> or <b>elogind</b> not installed nor running!'
 fi
 
 ROFI="rofi -theme themes/sidebar/five-${CHK_ROFI}.rasi"

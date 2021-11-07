@@ -57,7 +57,7 @@ case ${1} in
                 sed -i '/music_player /s|".*"|"spotify"|' "$LIST_APPS_DB"
             fi
             # Send successful notification.
-            exec "$V_NOTIFIER" -u low -r 73 -i "$MUSIC_ICON" 'Music Player' "Switched to <u>$("$LAUNCH_APPS" -g music_player)</u>"
+            exec notify-send.sh -u low -r 73 -i "$MUSIC_ICON" 'Music Player' "Switched to <u>$("$LAUNCH_APPS" -g music_player)</u>"
     ;;
 esac
 

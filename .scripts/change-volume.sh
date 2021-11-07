@@ -10,7 +10,7 @@ export LC_ALL=POSIX LANG=POSIX
 . "${HOME}/.joyful_desktop"
 
 # Ensure `amixer` already installed.
-command -v amixer >/dev/null 2>&1 || exec "$V_NOTIFIER" -u low -r 72 'Install `alsa-utils`!'
+command -v amixer >/dev/null 2>&1 || exec notify-send.sh -u low -r 72 'Install `alsa-utils`!'
 
 notify()
 {
@@ -26,7 +26,7 @@ notify()
         icon='notification-audio-volume-high'
     fi
     
-    exec "$V_NOTIFIER" -r 72 -t 750 -i "$icon" "${VOLUME%%%} " -h "int:value:${VOLUME%%%}"
+    exec notify-send.sh -r 72 -t 750 -i "$icon" "${VOLUME%%%} " -h "int:value:${VOLUME%%%}"
 }
 
 case ${1} in
@@ -38,7 +38,7 @@ case ${1} in
     ;;
     mute) amixer set Master 1+ toggle -q
           ! amixer get Master | grep -Fqo 'off' \
-          || exec "$V_NOTIFIER" -r 72 -t 750 -i 'notification-audio-volume-muted' 'Muted '
+          || exec notify-send.sh -r 72 -t 750 -i 'notification-audio-volume-muted' 'Muted '
     ;;
 esac
 

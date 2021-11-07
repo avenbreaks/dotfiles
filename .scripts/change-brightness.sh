@@ -10,7 +10,7 @@ export LC_ALL=POSIX LANG=POSIX
 . "${HOME}/.joyful_desktop"
 
 # Ensure `brightnessctl` already installed.
-command -v brightnessctl >/dev/null 2>&1 || exec "$V_NOTIFIER" -u low -r 71 'Install `brightnessctl`!'
+command -v brightnessctl >/dev/null 2>&1 || exec notify-send.sh -u low -r 71 'Install `brightnessctl`!'
 
 notify()
 {
@@ -28,7 +28,7 @@ notify()
         icon='notification-display-brightness-full'
     fi
     
-    exec "$V_NOTIFIER" -r 71 -t 750 -i "$icon" "${BRIGHTNESS} " -h "int:value:${BRIGHTNESS}"
+    exec notify-send.sh -r 71 -t 750 -i "$icon" "${BRIGHTNESS} " -h "int:value:${BRIGHTNESS}"
 }
 
 case ${1} in

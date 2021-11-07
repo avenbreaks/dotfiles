@@ -31,7 +31,7 @@ fi
 
 # Run session auto-locker.
 xautolock -time "$AUTOLOCK_MINUTE" -locker "$("$LAUNCH_APPS" -g lockscreen)" -detectsleep -resetsaver -corners 00-- -cornersize 1000 \
--notifier "${V_NOTIFIER} -i ${LOCK_ICON} 'Lockscreen' 'Will be locked in 5s from now!'" -notify 5 >/dev/null 2>&1 &
+-notifier "notify-send.sh -i ${LOCK_ICON} 'Lockscreen' 'Will be locked in 5s from now!'" -notify 5 >/dev/null 2>&1 &
 
 # Run MPD with notification-sender whenever track was changed.
 "$MPD_PLUS_NOTIFIER"

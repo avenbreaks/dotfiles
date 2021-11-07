@@ -10,7 +10,7 @@ export LC_ALL=POSIX LANG=POSIX
 . "${HOME}/.joyful_desktop"
 
 # Ensure `scrot` already installed.
-command -v scrot >/dev/null 2>&1 || exec "$V_NOTIFIER" -u low -r 76 'Install `scrot`!'
+command -v scrot >/dev/null 2>&1 || exec notify-send.sh -u low -r 76 'Install `scrot`!'
 
 {
     sleep .21s
@@ -36,11 +36,11 @@ command -v scrot >/dev/null 2>&1 || exec "$V_NOTIFIER" -u low -r 76 'Install `sc
         STS2='CLIPBOARD'
     fi
     
-    "$V_NOTIFIER" -r 76 -t 1000 -i "$SCREENSHOT_ICON" '' "In ${TIMER_SEC:-5}s .."
+    notify-send.sh -r 76 -t 1000 -i "$SCREENSHOT_ICON" '' "In ${TIMER_SEC:-5}s .."
     
     scrot -q "${QUALITY:-75}" -d "${TIMER_SEC:-5}" -e "$EXEC" || exit ${?}
     
-    exec "$V_NOTIFIER" -u low -r 76 -i "$SCREENSHOT_ICON" '' "<span size='small'><u>${STS1}</u><i>${STS2}</i></span>\nPicture acquired!"
+    exec notify-send.sh -u low -r 76 -i "$SCREENSHOT_ICON" '' "<span size='small'><u>${STS1}</u><i>${STS2}</i></span>\nPicture acquired!"
     
 } >/dev/null 2>&1 &
 

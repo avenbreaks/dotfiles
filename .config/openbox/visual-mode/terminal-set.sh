@@ -10,7 +10,7 @@ export LC_ALL=POSIX LANG=POSIX
 . "${HOME}/.joyful_desktop"
 
 # Ensure `urxvt` already installed.
-command -v urxvt >/dev/null 2>&1 || exec "$V_NOTIFIER" -u low -r 79 'Install `rxvt-unicode`!'
+command -v urxvt >/dev/null 2>&1 || exec notify-send.sh -u low -r 79 'Install `rxvt-unicode`!'
 
 # Set URxvt icon file automatically and URL launcher from "~/.joyful_desktop".
 sed -e "/URxvt.iconFile/s|:.*|:                   ${TERMINAL_ICON}|" \

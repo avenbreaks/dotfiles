@@ -18,7 +18,7 @@ start_ui()
     "${VISMOD_DIR}/UI.sh" "${2}"
     
     # Send successful notification.
-    "$V_NOTIFIER" -u low -r 80 -i "${GLADIENT_ICON_DIR}/${1}$([ -z "${2}" ] ||    \
+    notify-send.sh -u low -r 80 -i "${GLADIENT_ICON_DIR}/${1}$([ -z "${2}" ] ||   \
     echo ".${2}").png" "$([ -n "${2}" ] && echo 'Minimal' || echo 'Visual') Mode" \
     "$(echo "${1}" | sed 's|.*|\u&|') Theme"
 }

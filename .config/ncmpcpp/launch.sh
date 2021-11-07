@@ -26,7 +26,7 @@ if [ "$MUSIC_PLAYER" = 'mpd' ]; then
     } >/dev/null 2>&1 &
 else
     # Send fails notification.
-    exec "$V_NOTIFIER" -u low -r 77 -i "$MUSIC_ICON" 'Music Player' "Currently use <u>$("$LAUNCH_APPS" -g music_player)</u>"
+    exec notify-send.sh -u low -r 77 -i "$MUSIC_ICON" 'Music Player' "Currently use <u>$("$LAUNCH_APPS" -g music_player)</u>"
 fi
 
 exit ${?}

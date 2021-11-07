@@ -40,10 +40,10 @@ alias mpc="mpc -p ${MPD_PORT}"
         \( +clone -flip \) -compose Multiply -composite \( +clone -flop \) -compose Multiply -composite \) -alpha off  \
         -compose CopyOpacity -composite "$COVER_PNG" && rm -f "$COVER_JPG"|| exit ${?}
         if [ -f "$COVER_PNG" ]; then
-            "$V_NOTIFIER" -r 78 -i "$COVER_PNG" '' "<span size='small'>$(mpc --format '%artist%' current)</span>\n$(mpc --format '%title%' current)"
+            notify-send.sh -r 78 -i "$COVER_PNG" '' "<span size='small'>$(mpc --format '%artist%' current)</span>\n$(mpc --format '%title%' current)"
         fi
     else
-        "$V_NOTIFIER" -r 78 -i "$MUSIC_ICON" '' "<span size='small'>$(mpc --format '%artist%' current)</span>\n$(mpc --format '%title%' current)"
+        notify-send.sh -r 78 -i "$MUSIC_ICON" '' "<span size='small'>$(mpc --format '%artist%' current)</span>\n$(mpc --format '%title%' current)"
     fi
     
 } >/dev/null 2>&1 &

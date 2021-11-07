@@ -10,16 +10,16 @@ export LC_ALL=POSIX LANG=POSIX
 . "${HOME}/.joyful_desktop"
 
 # Ensure `scrot` already installed.
-command -v scrot >/dev/null 2>&1 || exec "$V_NOTIFIER" -u low -r 74 'Install `scrot`!'
+command -v scrot >/dev/null 2>&1 || exec notify-send.sh -u low -r 74 'Install `scrot`!'
 
 {
     sleep .21s
     rm -f /tmp/*_scrot*.png
     
     if scrot -q "${QUALITY:-75}" -sfbe 'mv -f $f /tmp/' -l style=dash,width=3,color='#2be491'; then
-        "$V_NOTIFIER" -r 74 -t 750 -i "$SCREENSHOT_ICON" '' 'Processing captured image ..'
+        notify-send.sh -r 74 -t 750 -i "$SCREENSHOT_ICON" '' 'Processing captured image ..'
     else
-        exec "$V_NOTIFIER" -r 74 -t 500 -i "$SCREENSHOT_ICON" '' 'Screenshot canceled!'
+        exec notify-send.sh -r 74 -t 500 -i "$SCREENSHOT_ICON" '' 'Screenshot canceled!'
     fi
     
     for CURRENT in /tmp/*_scrot*.png; do
@@ -33,10 +33,10 @@ command -v scrot >/dev/null 2>&1 || exec "$V_NOTIFIER" -u low -r 74 'Install `sc
         if echo "$FRAME_COLOR" | grep -qoE '^[#][0-9a-fA-F]{1,}$'; then
             FRAME_COLOR="${FRAME_COLOR:-#434c5e}"
         else
-            "$V_NOTIFIER" -u low -r 74 -i "$SCREENSHOT_ICON" '' "Screenshot failed!\n<span size='small'><u>${FRAME_COLOR}</u> isn't hexadecimal!</span>"
+            notify-send.sh -u low -r 74 -i "$SCREENSHOT_ICON" '' "Screenshot failed!\n<span size='small'><u>${FRAME_COLOR}</u> isn't hexadecimal!</span>"
             exec rm -f "/tmp/${CURRENT}.png"
         fi
-        eval "sleep .75s && \"$V_NOTIFIER\" -r 74 -t 750 -i \"$SCREENSHOT_ICON\" '' \"Applying ${FRAME_COLOR} ..\" &"
+        eval "sleep .75s && notify-send.sh -r 74 -t 750 -i \"$SCREENSHOT_ICON\" '' \"Applying ${FRAME_COLOR} ..\" &"
         convert "/tmp/${CURRENT}.png" \( +clone -alpha extract -draw 'fill black polygon 0,0 0,8 8,0 fill white circle 8,8 8,0' \
         \( +clone -flip \) -compose Multiply -composite \( +clone -flop \) -compose Multiply -composite \) -alpha off -compose  \
         CopyOpacity -composite "/tmp/${CURRENT}-rounded.png" && rm -f "/tmp/${CURRENT}.png" || exit ${?}
@@ -72,7 +72,7 @@ command -v scrot >/dev/null 2>&1 || exec "$V_NOTIFIER" -u low -r 74 'Install `sc
         eval "viewnior \"${SAVE_DIR}/Screenshots/${CURRENT}.png\" &"
     fi 
     
-    exec "$V_NOTIFIER" -u low -r 74 -i "$SCREENSHOT_ICON" '' "<span size='small'><u>${STS1}</u><i>${STS2}</i></span>\nPicture acquired!"
+    exec notify-send.sh -u low -r 74 -i "$SCREENSHOT_ICON" '' "<span size='small'><u>${STS1}</u><i>${STS2}</i></span>\nPicture acquired!"
     
 } >/dev/null 2>&1 &
 

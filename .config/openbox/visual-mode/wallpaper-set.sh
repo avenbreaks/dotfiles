@@ -39,15 +39,15 @@ get_size()
 
 case ${1} in
     generate) # Ensure `imagemagick` already installed.
-              { command -v identify && command -v convert; } >/dev/null 2>&1 || exec "$V_NOTIFIER" -u low -r 81 'Install `imagemagick`!'
+              { command -v identify && command -v convert; } >/dev/null 2>&1 || exec notify-send.sh -u low -r 81 'Install `imagemagick`!'
               # Generate wallapaper (colorized) from "~/.wallpapers/*.*".
               (
                   cd "$WALLPAPER_RAW_DIR"
                   for RAW in *.*; do
                       # Ensure there's a file.
-                      [ -f "$RAW" ] || exec "$V_NOTIFIER" -u low -r 81 -i "$WALLPAPER_ICON" '' 'Nothing will be generated!'
+                      [ -f "$RAW" ] || exec notify-send.sh -u low -r 81 -i "$WALLPAPER_ICON" '' 'Nothing will be generated!'
                       # Send generate notification per wallpapers.
-                      "$V_NOTIFIER" -u low -r 81 -i "$WALLPAPER_ICON" '' "Generating ..\n<span size='small'><u>${RAW}</u></span>"
+                      notify-send.sh -u low -r 81 -i "$WALLPAPER_ICON" '' "Generating ..\n<span size='small'><u>${RAW}</u></span>"
                       # Now convert.
                       if [ "$CHK_VISMOD" = 'mechanical' ]; then
                           convert "$RAW" -gravity center -crop 16:9 \( +clone -fill '#4c566a' -colorize 50% \) -gravity center   \
@@ -59,7 +59,7 @@ case ${1} in
                           "${WALLPAPER_DIR}/${RAW%%.*}$(get_size).jpg" || exit ${?}
                       fi
                       # Send successful notification.
-                      exec "$V_NOTIFIER" -u low -r 81 -i "$WALLPAPER_ICON" '' 'Successfuly generated!'
+                      exec notify-send.sh -u low -r 81 -i "$WALLPAPER_ICON" '' 'Successfuly generated!'
                   done
                   
               ) >/dev/null 2>&1
@@ -87,7 +87,7 @@ case ${1} in
                   # Write current wallpaper to configuration.
                   sed -i "/wallpaper$([ -z "$CHK_MINMOD" ] || echo '.minimal') /s|\".*\"|\"${WALLPAPER##*/}\"|" "$THEME_FILE"
                   # Send successful notification.
-                  "$V_NOTIFIER" -u low -r 81 -i "$WALLPAPER_ICON" '' "<span size='small'><u>${WALLPAPER##*/}</u></span>\n Sucessfully applied!"
+                  notify-send.sh -u low -r 81 -i "$WALLPAPER_ICON" '' "<span size='small'><u>${WALLPAPER##*/}</u></span>\n Sucessfully applied!"
               fi
     ;;
 esac
