@@ -153,49 +153,49 @@
     <!-- brightness controls -->
     <keybind key="XF86MonBrightnessUp">
       <action name="Execute">
-        <command>bash -c '~/.scripts/notify/change-brightness up'</command>
+        <command>~/.scripts/change-brightness.sh up</command>
       </action>
     </keybind>
     <keybind key="XF86MonBrightnessDown">
       <action name="Execute">
-        <command>bash -c '~/.scripts/notify/change-brightness down'</command>
+        <command>~/.scripts/change-brightness.sh down</command>
       </action>
     </keybind>
     <!-- volume control -->
     <keybind key="XF86AudioRaiseVolume">
       <action name="Execute">
-        <command>bash -c '~/.scripts/notify/change-volume up'</command>
+        <command>~/.scripts/change-volume.sh up</command>
       </action>
     </keybind>
     <keybind key="XF86AudioLowerVolume">
       <action name="Execute">
-        <command>bash -c '~/.scripts/notify/change-volume down'</command>
+        <command>~/.scripts/change-volume.sh down</command>
       </action>
     </keybind>
     <keybind key="XF86AudioMute">
       <action name="Execute">
-        <command>bash -c '~/.scripts/notify/change-volume mute'</command>
+        <command>~/.scripts/change-volume.sh mute</command>
       </action>
     </keybind>
     <!-- music control -->
     <keybind key="XF86AudioStop">
       <action name="Execute">
-        <command>bash -c '~/.scripts/music-controller stop'</command>
+        <command>~/.scripts/music-controller.sh stop</command>
       </action>
     </keybind>
     <keybind key="XF86AudioPlay">
       <action name="Execute">
-        <command>bash -c '~/.scripts/music-controller toggle'</command>
+        <command>~/.scripts/music-controller.sh toggle</command>
       </action>
     </keybind>
     <keybind key="XF86AudioPrev">
       <action name="Execute">
-        <command>bash -c '~/.scripts/music-controller prev'</command>
+        <command>~/.scripts/music-controller.sh prev</command>
       </action>
     </keybind>
     <keybind key="XF86AudioNext">
       <action name="Execute">
-        <command>bash -c '~/.scripts/music-controller next'</command>
+        <command>~/.scripts/music-controller.sh next</command>
       </action>
     </keybind>
     <!-- window switching with the arrow keys -->
@@ -355,7 +355,7 @@
     </keybind>
     <keybind key="W-S-r">
       <action name="Execute">
-        <command>bash -c '~/.config/openbox/visual-mode/mode-toggle just_ui; openbox --reconfigure'</command>
+        <command>~/.config/openbox/visual-mode/toggle-mode.sh just_ui</command>
       </action>
     </keybind>
     <keybind key="W-f">
@@ -397,57 +397,57 @@
     <!-- run apps -->
     <keybind key="W-l">
       <action name="Execute">
-        <command>bash -c '~/.scripts/default-apps/launch lockscreen'</command>
+        <command>~/.scripts/launch-apps.sh lockscreen</command>
       </action>
     </keybind>
     <keybind key="W-r">
       <action name="Execute">
-        <command>bash -c '~/.config/rofi/scripts/appsmenu.sh'</command>
+        <command>~/.config/rofi/scripts/apps.sh</command>
       </action>
     </keybind>
     <keybind key="W-Prior">
       <action name="Execute">
-        <command>bash -c '~/.config/rofi/scripts/backlight.sh'</command>
+        <command>~/.config/rofi/scripts/brightness.sh</command>
       </action>
     </keybind>
     <keybind key="W-Next">
       <action name="Execute">
-        <command>bash -c '~/.config/rofi/scripts/volume.sh'</command>
+        <command>~/.config/rofi/scripts/volume.sh</command>
       </action>
     </keybind>
     <keybind key="W-F12">
       <action name="Execute">
-        <command>~/.local/bin/networkmanager_dmenu</command>
+        <command>~/.local/bin/networkmanager_dmenu.py</command>
       </action>
     </keybind>
     <keybind key="W-S-e">
       <action name="Execute">
-        <command>bash -c '~/.config/rofi/scripts/powermenu.sh'</command>
+        <command>~/.config/rofi/scripts/power.sh</command>
       </action>
     </keybind>
     <keybind key="W-Return">
       <action name="Execute">
-        <command>bash -c '~/.scripts/default-apps/launch terminal'</command>
+        <command>~/.scripts/launch-apps.sh terminal</command>
       </action>
     </keybind>
     <keybind key="W-e">
       <action name="Execute">
-        <command>bash -c '~/.scripts/default-apps/launch filemanager'</command>
+        <command>~/.scripts/launch-apps.sh file_manager</command>
       </action>
     </keybind>
     <keybind key="W-m">
       <action name="Execute">
-        <command>bash -c '~/.config/rofi/scripts/$(~/.scripts/default-apps/launch -g musicpl).sh'</command>
+        <command>sh -c '~/.config/rofi/scripts/$(~/.scripts/launch-apps.sh -g music_player).sh'</command>
       </action>
     </keybind>
     <keybind key="Print">
       <action name="Execute">
-        <command>bash -c '~/.scripts/shot-now'</command>
+        <command>~/.scripts/screenshot-now.sh</command>
       </action>
     </keybind>
     <keybind key="W-Print">
       <action name="Execute">
-        <command>bash -c '~/.config/rofi/scripts/screenshot.sh'</command>
+        <command>~/.config/rofi/scripts/screenshot.sh</command>
       </action>
     </keybind>
   </keyboard>
