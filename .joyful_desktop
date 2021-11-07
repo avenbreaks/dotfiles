@@ -157,6 +157,8 @@ NCMPCPP_ALBUMART_BACKEND="w3m"
 # Attention! Don't change or re-arrange these variables unless you know! (^w^)     #
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
 
+PATH="${HOME}/.local/bin:${PATH}"
+
 CONFIG_DIR="${HOME}/.config"
 ICONS_DIR="${HOME}/.icons"
 THEMES_DIR="${HOME}/.themes"
@@ -230,7 +232,6 @@ LOCK_ICON="${GLADIENT_ICON_DIR}/lock.png"
 
 MPD_PLUS_NOTIFIER="${NCMPCPP_SCRIPTS_DIR}/mpd-notifier.sh"
 MPD_ALBUMART_NOTIFIER="${NCMPCPP_SCRIPTS_DIR}/notify.album-art.sh"
-V_NOTIFIER="${SCRIPTS_DIR}/notify-send/notify-send.sh"
 CHANGE_BRIGHTNESS="${SCRIPTS_DIR}/change-brightness.sh"
 CHANGE_VOLUME="${SCRIPTS_DIR}/change-volume.sh"
 LAUNCH_APPS="${SCRIPTS_DIR}/launch-apps.sh"
