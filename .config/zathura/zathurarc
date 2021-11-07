@@ -1,4 +1,7 @@
-# Zathura runtime configuration
+# ~/.config/zathura/zathurarc: Zathura document-viewer initialization.
+# aHR0cHM6Ly9naXRodWIuY29tL293bDRjZS9kb3RmaWxlcwo=
+
+# FUNCTIONS
 # ---
 set selection-clipboard clipboard
 set adjust-open "best-fit"
@@ -9,6 +12,9 @@ set scroll-step 50
 set zoom-min 10
 set guioptions ""
 set render-loading "false"
+
+# KEYBINDS
+# ---
 unmap f
 map f toggle_fullscreen
 map [fullscreen] f toggle_fullscreen
