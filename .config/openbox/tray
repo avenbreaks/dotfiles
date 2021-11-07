@@ -1,9 +1,11 @@
 #
-# This tray will restart after switching modes
-# Please add "&" after command
+# These tray will be restarted after switching modes.
+# Each line parsed as invidual execution processes,
+# don't use space " " nor any sh syntax except "#".
 #
+# aHR0cHM6Ly9naXRodWIuY29tL293bDRjZS9kb3RmaWxlcwo=
 # ---
 
-parcellite &
-#nm-applet &
-#xfce4-power-manager &
+parcellite
+#nm-applet
+#xfce4-power-manager
