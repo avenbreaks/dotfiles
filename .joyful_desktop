@@ -1,0 +1,243 @@
+#!/usr/bin/env sh
+
+# ~/.joyful_desktop: Joyful Desktop environment variables.
+# aHR0cHM6Ly9naXRodWIuY29tL293bDRjZS9kb3RmaWxlcwo=
+
+user_pref() {
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+# Appearance options                                         [ Needs restart UI ]  #
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+# About variable format || VARIABLE="VALUE"      # Comments                        #
+# How to restart UI?    || Switch modes / right-click on desktop / SUPER+SHIFT+R   #
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+# ?_START_BUTTON        || ? panel start button glyphs, copy-paste from gucharmap. #
+# ?                     || Partial user interface colors. Just customize yourself. #
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+
+# ~~~~~~~~~~ Color template, your changeable variable names and values. ~~~~~~~~~~ #
+COL_WHITE="#f9f9f9"                              # White
+COL_RED_MAGENTA="#f48ee8"                        # Red-Magenta
+COL_RED="#fa74b2"                                # Red
+COL_RED_VIOLET="#e88ef4"                         # Red-Violet
+COL_BLUE="#63c5ea"                               # Blue
+COL_BLUE_VIOLET="#ac8ef4"                        # Blue-Violet
+COL_GREEN="#44eb9f"                              # Green
+
+# ~~~ Don't change the variable name, the value is okay, use comments instead. ~~~ #
+MECH_START_BUTTON=""                           #   
+EYEC_START_BUTTON=""                           #   
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Mechanical ~~~ Visual Mode ~~~~ #
+MECH_TINT2_GRAD1="$COL_RED_MAGENTA"              # Tint2 gradient color #1
+MECH_TINT2_GRAD2="$COL_RED"                      # Tint2 gradient color #2
+MECH_ROFI_ACCENT="$MECH_TINT2_GRAD1"             # Rofi accent color
+MECH_ROFI_FRGRND="$COL_WHITE"                    # Rofi foreground color (text)
+MECH_DUNST_SMMRY="$MECH_ROFI_FRGRND"             # Title/summary color on dunst
+MECH_DUNST_PRGBR="$MECH_TINT2_GRAD1"             # Progress bar color on dunst
+MECH_OB_MENU_TTL="$MECH_TINT2_GRAD2"             # Title color of openbox menu
+MECH_OB_MENU_ITM="$MECH_TINT2_GRAD1"             # Item color of openbox menu
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Mechanical ~~~ Minimal Mode ~~~ #
+MECH_MIN_ROFI_ACCENT="$COL_WHITE"                # Rofi accent color
+MECH_MIN_ROFI_FRGRND="$MECH_MIN_ROFI_ACCENT"     # Rofi foreground color (text)
+MECH_MIN_DUNST_SMMRY="$MECH_MIN_ROFI_ACCENT"     # Title/summary color on dunst
+MECH_MIN_DUNST_PRGBR="$MECH_MIN_ROFI_ACCENT"     # Progress bar color on dunst
+MECH_MIN_OB_MENU_TTL="$MECH_MIN_ROFI_ACCENT"     # Title color of openbox menu
+MECH_MIN_OB_MENU_ITM="$COL_BLUE"                 # Item color of openbox menu
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Eye Candy ~~~~ Visual Mode ~~~~ #
+EYEC_TINT2_GRAD1="$COL_RED"                      # Tint2 gradient color #1
+EYEC_TINT2_GRAD2="$COL_RED_VIOLET"               # Tint2 gradient color #2
+EYEC_ROFI_ACCENT="$EYEC_TINT2_GRAD2"             # Rofi accent color
+EYEC_ROFI_FRGRND="$EYEC_TINT2_GRAD1"             # Rofi foreground color (text)
+EYEC_DUNST_SMMRY="$COL_BLUE"                     # Title/summary color on dunst
+EYEC_DUNST_PRGBR="$EYEC_TINT2_GRAD1"             # Progress bar color on dunst
+EYEC_OB_MENU_TTL="$EYEC_DUNST_SMMRY"             # Title color of openbox menu
+EYEC_OB_MENU_ITM="$EYEC_ROFI_FRGRND"             # Item color of openbox menu
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Eye Candy ~~~~ Minimal Mode ~~~ #
+EYEC_MIN_ROFI_ACCENT="$COL_RED_VIOLET"           # Rofi accent color
+EYEC_MIN_ROFI_FRGRND="$COL_RED"                  # Rofi foreground color (text)
+EYEC_MIN_DUNST_SMMRY="$EYEC_MIN_ROFI_ACCENT"     # Title/summary color on dunst
+EYEC_MIN_DUNST_PRGBR="$COL_GREEN"                # Progress bar color on dunst
+EYEC_MIN_OB_MENU_TTL="$EYEC_MIN_DUNST_SMMRY"     # Title color of openbox menu
+EYEC_MIN_OB_MENU_ITM="$EYEC_MIN_ROFI_FRGRND"     # Item color of openbox menu
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 0-100 ~~~~~~ Opacity Control ~~ #
+DUNST="95"
+URXVT="95"
+
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+# Dunst notification daemon and URxvt URL launcher options   [ Needs restart UI ]  #
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+
+WEB_BROWSER="brave-bin --use-gl=desktop --enable-features=VaapiVideoDecoder"
+
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+# Tint2 panel executor options for Minimal Mode                   [ Auto-reload ]  #
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+# INT_ETH               || Ethernet interface, check with `ifconfig` or `ip link`. #
+# INT_WIFI              || Wi-Fi interface, check with `ifconfig` or `ip link`.    #
+# TEMP_DEV              || Temp device, check in the /sys/devices/virtual/thermal. #
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+
+INT_ETH="enp4s0"
+INT_WIFI="wlan0"
+TEMP_DEV="thermal_zone0"
+
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+# Screenshot options                                              [ Auto-reload ]  #
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+# SAVE_SS               || Save screenshot? If not then it's copied to clipboards. #
+# SAVE_DIR              || Screenshot directory path -> "${SAVE_DIR}/Screenshots". #
+# COPY2CLIP             || Copy to clipboard? Automatically "yes" if SAVE_SS="no". #
+# ENABLE_FRAME          || Enable frame in the framed screenshots?                 #
+# FRAME_COLOR           || Hex, RGBA supports. Fill "auto" to use dominant color.  #
+# FRAME_PADDING         || Pixel padding-frame in the framed screenshots.          #
+# OPEN_FRAMED           || Open framed screenshot with viewnior if SAVE_SS="yes".  #
+# FRAMED_SHADOW_OPACITY || 0-100, high value means thick shadows.                  #
+# TIMER_SEC             || For timer screenshot, in seconds.                       #
+# QUALITY               || 1-100, high value means high-size with low-compression. #
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+
+SAVE_SS="yes"
+SAVE_DIR="${HOME}/Pictures"
+COPY2CLIP="yes"
+ENABLE_FRAME="yes"
+FRAME_COLOR="#434c5e" #434c5e
+FRAME_PADDING="15"
+OPEN_FRAMED="no"
+FRAMED_SHADOW_OPACITY="25"
+TIMER_SEC="5"
+QUALITY="100"
+
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+# Session auto-locker options                                    [ Needs logout ]  #
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+# AUTOLOCK_MINUTE       || In minutes, needs logout to reload configuration.       #
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+
+AUTOLOCK_MINUTE="5"
+
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+# Brightness and pulseaudio volume steps level options            [ Auto-reload ]  #
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+# AUDIO_STEPS           || 1-100, real values.                                     #
+# BRIGHTNESS_STEPS      || 1-100, percentages.                                     #
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+
+AUDIO_STEPS="5"
+BRIGHTNESS_STEPS="5"
+
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+# Ncmpcpp album-art image backend options                         [ Auto-reload ]  #
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+# Currently only supports "w3m" and "pixbuf" backend.                              #
+# * both backend on `rxvt-unicode` works like a charm                              #
+# * using `pixbuf` with terminal transparency is broken                            #
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+
+NCMPCPP_ALBUMART_BACKEND="w3m"
+
+
+}
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+# The following are owl4ce/dotfiles environment variables which called in "*.sh".  #
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+# Doesn't affect to all files, "*.dunstrc", "*.tint2rc", "rc.xml", "schema.pl", -- #
+# use absolute path (from "/") and/or use "~/" directly with shebang each "*.sh".  #
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+# Attention! Don't change or re-arrange these variables unless you know! (^w^)     #
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~#
+
+CONFIG_DIR="${HOME}/.config"
+ICONS_DIR="${HOME}/.icons"
+THEMES_DIR="${HOME}/.themes"
+SCRIPTS_DIR="${HOME}/.scripts"
+WALLPAPERS_DIR="${HOME}/.wallpapers"
+
+DUNST_DIR="${CONFIG_DIR}/dunst"
+MPD_DIR="${CONFIG_DIR}/mpd"
+NCMPCPP_DIR="${CONFIG_DIR}/ncmpcpp"
+NCMPCPP_SCRIPTS_DIR="${NCMPCPP_DIR}/scripts"
+OB_DIR="${CONFIG_DIR}/openbox"
+VISMOD_DIR="${OB_DIR}/visual-mode"
+ROFI_DIR="${CONFIG_DIR}/rofi"
+ROFI_THEMES_DIR="${ROFI_DIR}/themes"
+ROFI_SCRIPTS_DIR="${ROFI_DIR}/scripts"
+ROFI_SIDEBAR_DIR="${ROFI_THEMES_DIR}/sidebar"
+ROFI_SHARED_DIR="${ROFI_THEMES_DIR}/shared"
+ROFI_COLORSCHEMES_DIR="${ROFI_SHARED_DIR}/colorschemes"
+TINT2_DIR="${CONFIG_DIR}/tint2"
+GLADIENT_ICON_DIR="${ICONS_DIR}/Gladient"
+OB_BUTTON_DIR="${THEMES_DIR}/Buttons"
+MECH_BUTTON_DIR="${THEMES_DIR}/Fleon/openbox-3"
+EYEC_BUTTON_DIR="${THEMES_DIR}/Sweetly/openbox-3"
+
+GTK3_CONFIG="${CONFIG_DIR}/gtk-3.0/settings.ini"
+MPD_CONFIG="${MPD_DIR}/mpd.conf"
+OB_CONFIG="${OB_DIR}/rc.xml"
+OB_TRAY="${OB_DIR}/tray"
+ROFI_FULLSCREEN_CONFIG="${ROFI_SHARED_DIR}/settings.rasi"
+ROFI_SIDEBAR_CONFIG="${ROFI_SIDEBAR_DIR}/colors.rasi"
+TERMITE_CONFIG="${CONFIG_DIR}/termite/config"
+GTK2_CONFIG="${HOME}/.gtkrc-2.0"
+XRESOURCES_CONFIG="${HOME}/.Xresources"
+XSETTINGSD_CONFIG="${HOME}/.xsettingsd"
+
+STATE_EXT='joy'
+
+MODE_FILE="${VISMOD_DIR}/mode-state.${STATE_EXT:-joy}"
+
+MPD_PORT="$(grep 'port[ ]*".*"' "$MPD_CONFIG" | cut -d\" -f2)"
+MPD_MUSIC_DIR="$(grep 'music_directory[ ]*".*"' "$MPD_CONFIG" | cut -d\" -f2 | sed "s|~|${HOME}|")"
+CHK_TRAY="$(grep -Fv '#' "$OB_TRAY" )"
+CHK_VISMOD="$(grep -E 'visual_mode[ ]*"(mechanical|eyecandy)"' "$MODE_FILE" | cut -d\" -f2)"
+CHK_MINMOD="$(grep 'minimal_mode[ ]*"minimal"' "$MODE_FILE" | cut -d\" -f2)"
+CHK_PANEL_ORT="$(grep -E 'panel_orientation[ ]*"(vertical|horizontal)"' "$MODE_FILE" | cut -d\" -f2)"
+CHK_PANEL_ORT_V="$(grep -E 'vertical_panel[ ]*"(left|right)"' "$MODE_FILE" | cut -d\" -f2)"
+CHK_PANEL_ORT_H="$(grep -E 'horizontal_panel[ ]*"(top|bottom)"' "$MODE_FILE" | cut -d\" -f2)"
+CHK_OB_BUTTON_LOC="$(grep -o '<titleLayout>.*</titleLayout>' "$OB_CONFIG")"
+
+THEME_FILE="${VISMOD_DIR}/${CHK_VISMOD}/theme-state.${STATE_EXT:-joy}"
+
+CHK_OB_BUTTON_STYLE="$(grep "ob_button_style$([ -z "$CHK_MINMOD" ] || echo '.minimal')[ ]*\".*\"" "$THEME_FILE" | cut -d\" -f2)"
+CHK_OB_BUTTON_LOC="$(grep -E "ob_button_location$([ -z "$CHK_MINMOD" ] || echo '.minimal')[ ]*\"(left|right)\"" "$THEME_FILE" | cut -d\" -f2)"
+CHK_DUNST="$(grep "dunst$([ -z "$CHK_MINMOD" ] || echo '.minimal')[ ]*\".*\"" "$THEME_FILE" | cut -d\" -f2)"
+CHK_ROFI="$(grep "rofi_sidebar$([ -z "$CHK_MINMOD" ] || echo '.minimal')[ ]*\".*\"" "$THEME_FILE" | cut -d\" -f2)"
+CHK_WALLPAPER="$(grep "wallpaper$([ -z "$CHK_MINMOD" ] || echo '.minimal')[ ]*\".*\"" "$THEME_FILE" | cut -d\" -f2)"
+
+WALLPAPER_RAW_DIR="${WALLPAPERS_DIR}"
+WALLPAPER_DIR="${WALLPAPERS_DIR}/${CHK_VISMOD}"
+
+LIST_APPS_DB="${SCRIPTS_DIR}/list-apps.${STATE_EXT:-joy}"
+
+NCMPCPP_COVER='/tmp/ncmpcpp.album-art.jpg'
+NCMPCPP_NOTIFY_COVER='/tmp/ncmpcpp.notify.album-art.jpg'
+
+SCREENSHOT_ICON="${GLADIENT_ICON_DIR}/screenshot.png"
+WALLPAPER_ICON="${GLADIENT_ICON_DIR}/wallpaper.png"
+TERMINAL_ICON="${GLADIENT_ICON_DIR}/terminal.png"
+MUSIC_ICON="${GLADIENT_ICON_DIR}/music.png"
+LOCK_ICON="${GLADIENT_ICON_DIR}/lock.png"
+
+MPD_PLUS_NOTIFIER="${NCMPCPP_SCRIPTS_DIR}/mpd-notifier.sh"
+MPD_ALBUMART_NOTIFIER="${NCMPCPP_SCRIPTS_DIR}/notify.album-art.sh"
+V_NOTIFIER="${SCRIPTS_DIR}/notify-send/notify-send.sh"
+CHANGE_BRIGHTNESS="${SCRIPTS_DIR}/change-brightness.sh"
+CHANGE_VOLUME="${SCRIPTS_DIR}/change-volume.sh"
+LAUNCH_APPS="${SCRIPTS_DIR}/launch-apps.sh"
+MUSIC_CONTROLLER="${SCRIPTS_DIR}/music-controller.sh"
+SCREENSHOT_DRAW="${SCRIPTS_DIR}/screenshot-draw.sh"
+SCREENSHOT_NOW="${SCRIPTS_DIR}/screenshot-now.sh"
+SCREENSHOT_TIMER="${SCRIPTS_DIR}/screenshot-timer.sh"
+
+# Time to call user's preferences.
+user_pref
