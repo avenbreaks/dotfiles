@@ -1,0 +1,11 @@
+ob_button_style               "Backslash"
+ob_button_location            "left"
+dunst                         "mechanical"
+rofi_sidebar                  "vertical"
+wallpaper                     "okita-souji_FHD.jpg"
+
+ob_button_style.minimal       "Nav"
+ob_button_location.minimal    "right"
+dunst.minimal                 "mechanical.minimal"
+rofi_sidebar.minimal          "horizontal.minimal"
+wallpaper.minimal             "batik-1_4K.jpg"

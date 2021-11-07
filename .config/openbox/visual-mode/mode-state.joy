@@ -1,0 +1,5 @@
+visual_mode          "mechanical"
+minimal_mode         ""
+panel_orientation    "vertical"
+vertical_panel       "left"
+horizontal_panel     "bottom"

@@ -1,0 +1,11 @@
+ob_button_style               "Lovely"
+ob_button_location            "right"
+dunst                         "eyecandy"
+rofi_sidebar                  "vertical"
+wallpaper                     "cherry-blossoms_FHD.jpg"
+
+ob_button_style.minimal       "Dots2"
+ob_button_location.minimal    "left"
+dunst.minimal                 "eyecandy.minimal"
+rofi_sidebar.minimal          "horizontal.minimal"
+wallpaper.minimal             "floral-artistic-2_FHD.jpg"
