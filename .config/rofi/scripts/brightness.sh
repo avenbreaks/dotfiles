@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-# ~/.config/rofi/scripts/screenshot.sh: Run rofi screenshot-menu.
+# ~/.config/rofi/scripts/brightness.sh: Run rofi brightness-menu.
 # aHR0cHM6Ly9naXRodWIuY29tL293bDRjZS9kb3RmaWxlcwo=
 
 # Speeds up script execution.
@@ -11,16 +11,16 @@ export LC_ALL=POSIX LANG=POSIX
 
 ROFI="rofi -theme themes/sidebar/three-${CHK_ROFI}.rasi"
 
-A='' B='' C=''
+A='' B='' C=''
 
 MENU="$(printf "${A}\n${B}\n${C}\n" | ${ROFI} -dmenu -selected-row 1)"
 
 case "$MENU" in
-    "$A") exec "$SCREENSHOT_NOW" delay
+    "$A") exec "$CHANGE_BRIGHTNESS" up
     ;;
-    "$B") exec "$SCREENSHOT_DRAW"
+    "$C") exec "$CHANGE_BRIGHTNESS" down
     ;;
-    "$C") exec "$SCREENSHOT_TIMER"
+    "$B") exec "$CHANGE_BRIGHTNESS" optimal
     ;;
 esac
 

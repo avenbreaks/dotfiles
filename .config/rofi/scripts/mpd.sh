@@ -1,26 +1,34 @@
-#!/usr/bin/env bash
-export LC_ALL=POSIX LANG=POSIX; . "${HOME}/.owl4ce_var"
+#!/usr/bin/env sh
 
-ROFI="rofi -theme themes/sidebar/six-${CHK_ROFI_MOD}.rasi"
+# ~/.config/rofi/scripts/mpd.sh: Run rofi mpd-menu.
+# aHR0cHM6Ly9naXRodWIuY29tL293bDRjZS9kb3RmaWxlcwo=
+
+# Speeds up script execution.
+export LC_ALL=POSIX LANG=POSIX
+
+# Load Joyful Desktop environment variables.
+. "${HOME}/.joyful_desktop"
+
+ROFI="rofi -theme themes/sidebar/six-${CHK_ROFI}.rasi"
 
 A='' B='' C='' D='' E='' F=''
 
 status="$("$MUSIC_CONTROLLER" status)"
 current="$("$MUSIC_CONTROLLER" title)"
 
-[[ "$status" != *'laying'* ]] || B=''
+[ -z "$status" ] || B=''
 
 active='' urgent=''
 
-if [[ "$status" = *'single: on'* ]]; then
+if mpc -p "$MPD_PORT" status | grep -Fqo 'single: on'; then
     active='-a 4'
-elif [[ "$status" = *'single: off'* ]]; then
+elif mpc -p "$MPD_PORT" status | grep -Fqo 'single: off'; then
     urgent='-u 4'
 else
     E=''
 fi
 
-[ -n "$urgent" ] && urgent+=',5' || urgent='-u 5'
+[ -n "$urgent" ] && urgent="${urgent},5" || urgent='-u 5'
 
 [ -n "$current" ] || current='-'
 
@@ -35,10 +43,10 @@ case "$MENU" in
     ;;
     "$D") exec "$MUSIC_CONTROLLER" next
     ;;
-    "$E") exec mpc -q single
+    "$E") exec mpc -p "$MPD_PORT" -q single
     ;;
-    "$F") exec "$MUSIC_CONTROLLER" switchpl
+    "$F") exec "$MUSIC_CONTROLLER" switch
     ;;
-esac 
+esac
 
 exit ${?}

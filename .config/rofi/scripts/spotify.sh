@@ -1,16 +1,24 @@
-#!/usr/bin/env bash
-export LC_ALL=POSIX LANG=POSIX; . "${HOME}/.owl4ce_var"
+#!/usr/bin/env sh
 
-ROFI="rofi -theme themes/sidebar/five-${CHK_ROFI_MOD}.rasi"
+# ~/.config/rofi/scripts/spotify.sh: Run rofi spotify-menu.
+# aHR0cHM6Ly9naXRodWIuY29tL293bDRjZS9kb3RmaWxlcwo=
+
+# Speeds up script execution.
+export LC_ALL=POSIX LANG=POSIX
+
+# Load Joyful Desktop environment variables.
+. "${HOME}/.joyful_desktop"
+
+ROFI="rofi -theme themes/sidebar/five-${CHK_ROFI}.rasi"
 
 A='' B='' C='' D='' E=''
 
 status="$("$MUSIC_CONTROLLER" status)"
 current="$("$MUSIC_CONTROLLER" title)"
 
-[[ "$status" != *'laying'* ]] || B=''
+[ -z "$status" ] || B=''
 
-active='' urgent='-a 4' 
+active='' urgent='-a 4'
 
 [ -n "$current" ] || current='-'
 
@@ -25,8 +33,8 @@ case "$MENU" in
     ;;
     "$D") exec "$MUSIC_CONTROLLER" next
     ;;
-    "$E") exec "$MUSIC_CONTROLLER" switchpl
+    "$E") exec "$MUSIC_CONTROLLER" switch
     ;;
-esac 
+esac
 
 exit ${?}

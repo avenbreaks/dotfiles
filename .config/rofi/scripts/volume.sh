@@ -1,19 +1,27 @@
-#!/usr/bin/env bash
-export LC_ALL=POSIX LANG=POSIX; . "${HOME}/.owl4ce_var"
+#!/usr/bin/env sh
 
-ROFI="rofi -theme themes/sidebar/three-${CHK_ROFI_MOD}.rasi"
+# ~/.config/rofi/scripts/volume.sh: Run rofi volume-menu.
+# aHR0cHM6Ly9naXRodWIuY29tL293bDRjZS9kb3RmaWxlcwo=
+
+# Speeds up script execution.
+export LC_ALL=POSIX LANG=POSIX
+
+# Load Joyful Desktop environment variables.
+. "${HOME}/.joyful_desktop"
+
+ROFI="rofi -theme themes/sidebar/three-${CHK_ROFI}.rasi"
 
 A='' B='' C=''
 
 MENU="$(printf "${A}\n${B}\n${C}\n" | ${ROFI} -dmenu -selected-row 1)"
 
 case "$MENU" in
-    "$A") exec "$AVOLUME_CHANGER" up
+    "$A") exec "$CHANGE_VOLUME" up
     ;;
-    "$C") exec "$AVOLUME_CHANGER" down
+    "$C") exec "$CHANGE_VOLUME" down
     ;;
-    "$B") exec "$AVOLUME_CHANGER" mute
+    "$B") exec "$CHANGE_VOLUME" mute
     ;;
-esac 
+esac
 
 exit ${?}
