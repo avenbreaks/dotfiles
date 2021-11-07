@@ -1,6 +1,8 @@
 #!/usr/bin/env perl
 
-# obmenu-generator - configuration file
+# ~/.config/obmenu-generator/config.pl: obmenu-generator - configuration file
+# aHR0cHM6Ly9naXRodWIuY29tL293bDRjZS9kb3RmaWxlcwo=
+
 # This file will be updated automatically.
 # Any additional comment and/or indentation will be lost.
 
