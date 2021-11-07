@@ -1,33 +1,33 @@
 # Minimal Lambda-Rounded ZSH Theme.
-# Author: owl4ce
+# Author: owl4ce <alternate-se7en@pm.me>
 # Requires Nerd Fonts for the glyphs.
-# ----------------------------------
+# -~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-~-
 # https://github.com/owl4ce/dotfiles
 
-if [[ "$EUID" -eq 0 ]]; then
+if [ "${EUID:-$(id -u)}" -eq 0 ]; then
     user_symbol="%F{1}%Bλ%b%f"
 else
     user_symbol="%F{5}%Bλ%b%f"
 fi
 
-# Configuration
+# CONFIGURATION
 # ---
 num_dirs=2 # Use 0 to show full path.
 dir_path="%F{0}%K{0}%F{white}%$num_dirs~ %K{8} %F{4}%{%k%}%F{8}%f"
 background_jobs="%(1j.%F{2}%f.)"
 non_zero_return_value="%(0?..%F{1}%f)"
 
-# Left part of the prompt
+# LEFT PROMPT
 # ---
 PROMPT='$(git_prompt_info) $user_symbol '
-# Right part of the prompt
+# RIGHT PROMPT
 # ---
 RPROMPT=' $background_jobs $non_zero_return_value $dir_path'
-# Bold user input
+# BOLD INPUT
 # ---
 zle_highlight=(default:bold)
 
-# Git prompt
+# GIT PROMPT
 # ---
 ZSH_THEME_GIT_PROMPT_PREFIX="%F{8}%K{8}%F{4} %K{0} %F{white}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{%k%}%F{0}%f"
