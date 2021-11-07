@@ -1,6 +1,7 @@
-! Do not re-arrange !
+! # ~/.Xresources: X resource database.
+! # aHR0cHM6Ly9naXRodWIuY29tL293bDRjZS9kb3RmaWxlcwo=
 
-! URxvt Configuration
+! # URxvt configuration.
 URxvt.font:                       xft:mplus Nerd Font Mono:size=11:autohint=true,xft:Noto Color Emoji:pixelsize=12:antialias=false,xft:Monospace:size=11:autohint=true
 URxvt.geometry:                   84x16
 URxvt.internalBorder:             20
@@ -15,11 +16,12 @@ URxvt.scrollWithBuffer:           false
 URxvt.urgentOnBell:               false
 URxvt.depth:                      32
 URxvt.iso14755:                   false
-URxvt.iconFile:                   /home/username/.icons/gladient/term.png
-! Uncomment below if too much font spacing
+URxvt.iconFile:                   /home/username/.icons/Gladient/terminal.png
+
+! # Uncomment the following line if too much font spacing.
 !URxvt.letterSpace: -1
 
-! URxvt Extensions
+! # URxvt extensions.
 URxvt.perl-ext-common:            default,tabbedex,url-select
 URxvt.keysym.Control-Shift-C:     eval:selection_to_clipboard
 URxvt.keysym.Control-Shift-V:     eval:paste_clipboard
@@ -28,7 +30,7 @@ URxvt.keysym.Control-Down:        eval:scroll_down 1
 URxvt.keysym.Control-Home:        eval:scroll_to_top
 URxvt.keysym.Control-End:         eval:scroll_to_bottom
 
-! Tabbedex Ext
+! # Tabbed-extended extension.
 URxvt.tabbedex.no-tabbedex-keys:  yes
 URxvt.tabbedex.new-button:        false
 URXvt.tabbedex.reopen-on-close:   yes
@@ -51,20 +53,20 @@ URxvt.keysym.Control-Prior:       tabbedex:prev_tab
 URxvt.keysym.Control-Shift-Next:  tabbedex:move_tab_right
 URxvt.keysym.Control-Shift-Prior: tabbedex:move_tab_left
 
-! Resize Font Ext
+! # Resize-font extension.
 URxvt.resize-font.step: 1
 URxvt.keysym.Control-minus:       resize-font:smaller
 URxvt.keysym.Control-plus:        resize-font:bigger
 URxvt.keysym.Control-equal:       resize-font:reset
 URxvt.keysym.Control-question:    resize-font:show
 
-! URL Select Ext
+! # URL-select extension.
 URxvt.keysym.Control-Shift-U:     url-select:select_next
 URvxt.url-select.button:          2
 URxvt.url-select.launcher:        brave-bin --use-gl=desktop --enable-features=VaapiVideoDecoder
 URxvt.url-select.underline:       true
 
-! Color Schemes [ black > red > green > yellow > blue > magenta > cyan > white ]
+! # Color schemes.
 #define black0                    [95]#373E4D
 #define black1                    #3B4252
 #define black2                    #434C5E
@@ -99,7 +101,7 @@ URxvt.url-select.underline:       true
 *.color13:                        magenta1
 *.color14:                        cyan1
 
-! Termody [ Reverse the Visual ]
+! # Only for visual reverser, do not change the following configuration.
 *.foreground:                     white0
 *.background:                     black0
 *.cursorColor:                    white0
