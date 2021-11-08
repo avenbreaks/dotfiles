@@ -440,9 +440,19 @@
         <command>sh -c '~/.config/rofi/scripts/$(~/.scripts/launch-apps.sh -g music_player).sh'</command>
       </action>
     </keybind>
+    <keybind key="W-S-Print">
+      <action name="Execute">
+        <command>~/.scripts/screenshot-draw.sh</command>
+      </action>
+    </keybind>
     <keybind key="Print">
       <action name="Execute">
         <command>~/.scripts/screenshot-now.sh</command>
+      </action>
+    </keybind>
+    <keybind key="W-C-Print">
+      <action name="Execute">
+        <command>~/.scripts/screenshot-timer.sh</command>
       </action>
     </keybind>
     <keybind key="W-Print">
