@@ -1,6 +1,6 @@
 #
 # These tray will be restarted after switching modes.
-# Each line parsed as invidual execution processes,
+# Each line parsed as individual execution processes,
 # don't use space " " nor any sh syntax except "#".
 #
 # aHR0cHM6Ly9naXRodWIuY29tL293bDRjZS9kb3RmaWxlcwo=
