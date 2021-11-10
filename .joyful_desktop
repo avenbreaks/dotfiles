@@ -210,11 +210,13 @@ CHK_OB_BUTTON_LOC="$(grep -o '<titleLayout>.*</titleLayout>' "$OB_CONFIG")"
 
 THEME_FILE="${VISMOD_DIR}/${CHK_VISMOD}/theme-state.${STATE_EXT:-joy}"
 
-CHK_OB_BUTTON_STYLE="$(grep "ob_button_style$([ -z "$CHK_MINMOD" ] || echo '.minimal')[ ]*\".*\"" "$THEME_FILE" | cut -d\" -f2)"
-CHK_OB_BUTTON_LOC="$(grep -E "ob_button_location$([ -z "$CHK_MINMOD" ] || echo '.minimal')[ ]*\"(left|right)\"" "$THEME_FILE" | cut -d\" -f2)"
-CHK_DUNST="$(grep "dunst$([ -z "$CHK_MINMOD" ] || echo '.minimal')[ ]*\".*\"" "$THEME_FILE" | cut -d\" -f2)"
-CHK_ROFI="$(grep "rofi_sidebar$([ -z "$CHK_MINMOD" ] || echo '.minimal')[ ]*\".*\"" "$THEME_FILE" | cut -d\" -f2)"
-CHK_WALLPAPER="$(grep "wallpaper$([ -z "$CHK_MINMOD" ] || echo '.minimal')[ ]*\".*\"" "$THEME_FILE" | cut -d\" -f2)"
+DOTMINMOD="$([ -z "$CHK_MINMOD" ] || echo '.minimal')"
+
+CHK_OB_BUTTON_STYLE="$(grep "ob_button_style${DOTMINMOD}[ ]*\".*\"" "$THEME_FILE" | cut -d\" -f2)"
+CHK_OB_BUTTON_LOC="$(grep -E "ob_button_location${DOTMINMOD}[ ]*\"(left|right)\"" "$THEME_FILE" | cut -d\" -f2)"
+CHK_DUNST="$(grep "dunst${DOTMINMOD}[ ]*\".*\"" "$THEME_FILE" | cut -d\" -f2)"
+CHK_ROFI="$(grep "rofi_sidebar${DOTMINMOD}[ ]*\".*\"" "$THEME_FILE" | cut -d\" -f2)"
+CHK_WALLPAPER="$(grep "wallpaper${DOTMINMOD}[ ]*\".*\"" "$THEME_FILE" | cut -d\" -f2)"
 
 WALLPAPER_RAW_DIR="${WALLPAPERS_DIR}"
 WALLPAPER_DIR="${WALLPAPERS_DIR}/${CHK_VISMOD}"
