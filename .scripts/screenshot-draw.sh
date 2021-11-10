@@ -65,7 +65,7 @@ command -v scrot >/dev/null 2>&1 || exec notify-send.sh -u low -r 74 'Install `s
     
     if [ -f "${SAVE_DIR}/Screenshots/${CURRENT}.png" ] && [ "$OPEN_FRAMED" = 'yes' ] && [ -x "$(command -v viewnior)" ]; then
         eval "viewnior \"${SAVE_DIR}/Screenshots/${CURRENT}.png\" &"
-    fi 
+    fi
     
     exec notify-send.sh -u low -r 74 -i "$SCREENSHOT_ICON" '' "<span size='small'><u>${STS1}</u><i>${STS2}</i></span>\nPicture acquired!"
     

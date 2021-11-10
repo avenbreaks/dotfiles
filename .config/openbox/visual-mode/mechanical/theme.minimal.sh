@@ -23,7 +23,7 @@ partially()
 }
 
 apply_all()
-{    
+{
     # Set GTK and Icon themes.
     sed -e '/gtk-icon-theme-name/s|=".*"|="Papirus-Dark-Custom"|' \
         -e '/gtk-theme-name/s|=".*"|="Fleon"|'                    \
@@ -38,8 +38,8 @@ apply_all()
             sed -e '/Net\/IconThemeName /s|".*"|"Papirus-Dark-Custom"|' \
                 -e '/Net\/ThemeName /s|".*"|"Fleon"|'                   \
                 -i "$XSETTINGSD_CONFIG"
-            eval "sleep .07s && xsettingsd >/dev/null 2>&1 &"
-            eval "sleep 1.3s && killall -9 xsettingsd >/dev/null 2>&1 &"
+            { sleep .07s && xsettingsd >/dev/null 2>&1; } &
+            { sleep 1.3s && killall -9 xsettingsd >/dev/null 2>&1; } &
         fi
     fi
     

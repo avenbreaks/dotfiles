@@ -56,7 +56,7 @@ CURRENT_TERM="$("$LAUNCH_APPS" -g terminal)"
 
 if [ "$CURRENT_TERM" = 'urxvt' ]; then
     FG_BLACK="$(grep 'foreground.*black0' "$XRESOURCES_CONFIG" | grep -Fv '!')"
-    FG_WHITE="$(grep 'foreground.*white0' "$XRESOURCES_CONFIG" | grep -Fv '!')"    
+    FG_WHITE="$(grep 'foreground.*white0' "$XRESOURCES_CONFIG" | grep -Fv '!')"
     case ${1} in
         transparency) # Sync transparency.
                       transparency apply

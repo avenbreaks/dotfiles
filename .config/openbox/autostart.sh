@@ -25,9 +25,9 @@ picom -b >/dev/null 2>&1
 
 # Run authentication agent (PolicyKit).
 if [ -x "$(command -v lxpolkit)" ]; then
-    eval "lxpolkit >/dev/null 2>&1 &"
-elif [ -x '/usr/libexec/polkit-gnome-authentication-agent-1' ]; then
-    eval "/usr/libexec/polkit-gnome-authentication-agent-1 >/dev/null 2>&1 &"
+    lxpolkit >/dev/null 2>&1 &
+elif POLKIT_GNOME="$(find /usr/local/lib /usr/local/libexec /usr/local/lib64 /usr/local/libexec64 /usr/lib /usr/libexec /usr/lib64 /usr/libexec64 ${HOME}/.nix-profile/lib ${HOME}/.nix-profile/libexec ${HOME}/.nix-profile/lib64 ${HOME}/.nix-profile/libexec64 -type f -iname 'polkit-gnome-authentication-agent-1' 2>/dev/null | sed 1q)" && [ -x "$POLKIT_GNOME" ]; then
+    "$POLKIT_GNOME" >/dev/null 2>&1 &
 fi
 
 # Run session auto-locker.

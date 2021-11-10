@@ -38,8 +38,8 @@ apply_all()
             sed -e '/Net\/IconThemeName /s|".*"|"Papirus-Custom"|' \
                 -e '/Net\/ThemeName /s|".*"|"Sweetly"|'            \
                 -i "$XSETTINGSD_CONFIG"
-            eval "sleep .07s && xsettingsd >/dev/null 2>&1 &"
-            eval "sleep 1.3s && killall -9 xsettingsd >/dev/null 2>&1 &"
+            { sleep .07s && xsettingsd >/dev/null 2>&1; } &
+            { sleep 1.3s && killall -9 xsettingsd >/dev/null 2>&1; } &
         fi
     fi
     

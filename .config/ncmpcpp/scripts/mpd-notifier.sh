@@ -13,6 +13,7 @@ export LC_ALL=POSIX LANG=POSIX
 { command -v mpd && command -v mpc; } >/dev/null 2>&1 || exit 1
 
 # Alias `mpc` to port 7777.
+[ -z "$BASH" ] || shopt -s expand_aliases
 alias mpc="mpc -p ${MPD_PORT}"
 
 {

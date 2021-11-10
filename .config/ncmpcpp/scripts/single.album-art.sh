@@ -13,6 +13,7 @@ export LC_ALL=POSIX LANG=POSIX
 { command -v mpd && command -v mpc; } >/dev/null 2>&1 || exit 1
 
 # Alias `mpc` to port 7777.
+[ -z "$BASH" ] || shopt -s expand_aliases
 alias mpc="mpc -p ${MPD_PORT}"
 
 w3m()
@@ -40,12 +41,13 @@ w3m()
             if [ -n "$W_RES" -o -n "$H_RES" ]; then
                 # Keep image aspect ratio by depend on width for both.
                 printf '%b\n%s;\n%s\n' "0;1;0;0;${W_RES};${W_RES};;;;;${COVER_JPG}" 3 4 | "${W3M:-false}" >/dev/null 2>&1
+                unset W_RES H_RES
             else
-                printf "${CL}${R}error:${NC} window ${m}width${NC} or ${m}height${NC} invalid!" >&2 
+                printf "${CL}${R}error:${NC} invalid window ${m}width${NC} and/or ${m}height${NC}!" >&2
             fi
         done
     else
-        printf "${CL}${R}error:${m} xorg-xprop${NC} and/or ${m}xorg-xwininfo${NC} aren't installed!" >&2 
+        printf "${CL}${R}error:${m} xorg-xprop${NC} and/or ${m}xorg-xwininfo${NC} aren't installed!" >&2
     fi
 }
 
@@ -70,14 +72,12 @@ pixbuf()
     
     ALBUM_DIR="${MPD_MUSIC_DIR}/${ALBUM_DIR}"
     
-    COVERS="$(find "$ALBUM_DIR" -type d -exec find "{}" -maxdepth 1 -type f -iregex ".*/.*\(${ALBUM}\|cover\|folder\|artwork\|front\).*[.]\(jpe?g\|png\|gif\|bmp\)" \;)"
+    ALBUM_COVER="$(find "$ALBUM_DIR" -type d -exec find "{}" -maxdepth 1 -type f -iregex ".*/.*\(${ALBUM}\|cover\|folder\|artwork\|front\).*[.]\(jpe?g\|png\|gif\|bmp\)" \; 2>/dev/null | sed 1q)"
     
-    SOURCE="$(printf "$COVERS" | sed 1q)"
-    
-    if [ -n "$SOURCE" ]; then
+    if [ -n "$ALBUM_COVER" ]; then
         [ ! -f "$COVER_JPG" ] || rm -f "$COVER_JPG"
         # Scale image width to 500px and compress using ffmpeg or imagemagick, imagemagick as fallback.
-        ffmpeg -i "$SOURCE" -vf scale=500:500 -crf 0 "$COVER_JPG" || magick "$SOURCE" -strip -interlace Plane -sampling-factor 4:2:0 -scale 500x -quality 85% "$COVER_JPG"
+        { ffmpeg -i "$ALBUM_COVER" -vf scale=500:500 -crf 0 "$COVER_JPG" || magick "$ALBUM_COVER" -strip -interlace Plane -sampling-factor 4:2:0 -scale 500x -quality 85% "$COVER_JPG"; } >/dev/null 2>&1
         if [ -f "$COVER_JPG" ]; then
             "$NCMPCPP_ALBUMART_BACKEND"
         fi
@@ -85,6 +85,6 @@ pixbuf()
         "$NCMPCPP_ALBUMART_BACKEND" clear
     fi
     
-} >/dev/null 2>&1 &
+} & # DEBUG: Just remove "&" symbol on left side then execute with trace paramater, `yash -x ./single.album-art.sh`.
 
 exit ${?}
