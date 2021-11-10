@@ -14,7 +14,7 @@ command -v amixer >/dev/null 2>&1 || exec notify-send.sh -u low -r 72 'Install `
 
 notify()
 {
-    VOLUME="$(amixer get Master | grep -o '[0-9]*%' | sed 1q)"
+    VOLUME="$(amixer get Master | grep -m1 -o '[0-9]*%')"
     
     if [ "${VOLUME%%%}" -eq 0 ]; then
         icon='notification-audio-volume-muted'
@@ -37,8 +37,8 @@ case ${1} in
           amixer sset Master "${AUDIO_STEPS:-5}%-" -q
     ;;
     mute) amixer set Master 1+ toggle -q
-          ! amixer get Master | grep -Fqo 'off' \
-          || exec notify-send.sh -r 72 -t 750 -i 'notification-audio-volume-muted' 'Muted '
+          ! amixer get Master | grep -Fqo 'off' || \
+          exec notify-send.sh -r 72 -t 750 -i 'notification-audio-volume-muted' 'Muted '
     ;;
 esac
 

@@ -12,12 +12,12 @@ export LC_ALL=POSIX LANG=POSIX
 LINUX_SYS='/sys/devices/virtual/thermal'
 
 if [ -d "${LINUX_SYS}/${TEMP_DEV}" ]; then
-    exec echo "$(($([ -n "$BASH" ] && eval "<\"${LINUX_SYS}/${TEMP_DEV}/temp\"" || \
+    echo "$(($([ -n "$BASH" ] && eval "<\"${LINUX_SYS}/${TEMP_DEV}/temp\"" || \
     cat "${LINUX_SYS}/${TEMP_DEV}/temp")/1000))˚C"
 elif [ ! -d "$LINUX_SYS" ]; then
-    exec echo "${LINUX_SYS} is an invalid path!"
+    echo "${LINUX_SYS} is an invalid path!"
 else
-    exec echo "${TEMP_DEV} not found!"
+    echo "${TEMP_DEV} not found!"
 fi
 
 exit ${?}

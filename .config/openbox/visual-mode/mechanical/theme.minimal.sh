@@ -60,7 +60,7 @@ apply_all()
     
     # Install and set Openbox button-style and theme.
     install -t "$MECH_BUTTON_DIR"/ "${OB_BUTTON_DIR}/${CHK_OB_BUTTON_STYLE}"/*.'xbm'
-    THEME_LINE="$(cat -n "$OB_CONFIG" | grep '<name>.*</name>' | sed 1q | grep -oE '[0-9]+')"
+    THEME_LINE="$(grep -m1 -no '<name>.*</name>' "$OB_CONFIG" | grep -oE '[0-9]+')"
     sed -i "${THEME_LINE}s|<name>.*</name>|<name>Fleon</name>|" "$OB_CONFIG"
 }
 

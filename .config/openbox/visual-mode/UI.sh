@@ -3,6 +3,9 @@
 # ~/.config/openbox/visual-mode/UI.sh: Start user interface.
 # aHR0cHM6Ly9naXRodWIuY29tL293bDRjZS9kb3RmaWxlcwo=
 
+# Speeds up script execution, then restore UTF-8 before launching apps.
+OLD_LANG="$LANG"; export LC_ALL=POSIX LANG=POSIX
+
 # Load Joyful Desktop environment variables.
 . "${HOME}/.joyful_desktop"
 
@@ -68,7 +71,9 @@ paneld()
     "${VISMOD_DIR}/terminal-set.sh" transparency
     
     # Set partial accent colors from "~/.joyful_desktop".
-    "${VISMOD_DIR}/${CHK_VISMOD}/theme$([ -z "$CHK_MINMOD" ] || echo '.minimal').sh" partially 
+    "${VISMOD_DIR}/${CHK_VISMOD}/theme${DOTMINMOD}.sh" partially
+    
+    unset LC_ALL; export LANG="$OLD_LANG"
     
     # Run dunst notification daemon.
     notifyd

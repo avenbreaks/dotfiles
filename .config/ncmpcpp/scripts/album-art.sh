@@ -23,7 +23,7 @@ w3m()
     R='\033[1;31m' NC='\033[0m' CL='\033c' m='\033[0;35m'
     
     # Find `w3mimgdisplay` executables.
-    W3M="$(find /usr/local/lib /usr/local/libexec /usr/local/lib64 /usr/local/libexec64 /usr/lib /usr/libexec /usr/lib64 /usr/libexec64 ${HOME}/.nix-profile/lib ${HOME}/.nix-profile/libexec ${HOME}/.nix-profile/lib64 ${HOME}/.nix-profile/libexec64 -type f -path '*/w3m/*' -iname 'w3mi*' -print 2>/dev/null | sed 1q)"
+    W3M="$(find /usr/local/lib /usr/local/libexec /usr/local/lib64 /usr/local/libexec64 /usr/lib /usr/libexec /usr/lib64 /usr/libexec64 ${HOME}/.nix-profile/lib ${HOME}/.nix-profile/libexec ${HOME}/.nix-profile/lib64 ${HOME}/.nix-profile/libexec64 -type f -path '*/w3m/*' -iname 'w3mi*' 2>/dev/null | sed 1q)"
     
     sleep .25s
     
@@ -70,14 +70,14 @@ pixbuf()
     
     ALBUM_DIR="${MPD_MUSIC_DIR}/${ALBUM_DIR}"
     
-    COVERS="$(find "$ALBUM_DIR" -type d -exec find "{}" -maxdepth 1 -type f -iregex ".*/.*\(${ALBUM}\|cover\|folder\|artwork\|front\).*[.]\(jpe?g\|png\|gif\|bmp\)" \; )"
+    COVERS="$(find "$ALBUM_DIR" -type d -exec find "{}" -maxdepth 1 -type f -iregex ".*/.*\(${ALBUM}\|cover\|folder\|artwork\|front\).*[.]\(jpe?g\|png\|gif\|bmp\)" \;)"
     
     SOURCE="$(printf "$COVERS" | sed 1q)"
     
     if [ -n "$SOURCE" ]; then
         [ ! -f "$COVER_JPG" ] || rm -f "$COVER_JPG"
         # Resize image width to 500px with ffmpeg or imagemagick, imagemagick as fallback.
-        ffmpeg -i "$SOURCE" -vf scale=500:500 "$COVER_JPG" || convert "$SOURCE" -resize 500x "$COVER_JPG" || exit ${?}
+        ffmpeg -i "$SOURCE" -vf scale=500:500 "$COVER_JPG" || convert "$SOURCE" -resize 500x "$COVER_JPG"
         if [ -f "$COVER_JPG" ]; then
             "$NCMPCPP_ALBUMART_BACKEND"
         fi

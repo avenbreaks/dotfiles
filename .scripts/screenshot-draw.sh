@@ -28,7 +28,7 @@ command -v scrot >/dev/null 2>&1 || exec notify-send.sh -u low -r 74 'Install `s
     
     if [ "$ENABLE_FRAME" = 'yes' ]; then
         if [ "$FRAME_COLOR" = 'auto' ]; then
-            FRAME_COLOR="$(convert "/tmp/${CURRENT}.png" -scale 50x50! -depth 8 +dither -colors 8 -format '%c' histogram:info: | sort -nr | grep -oE '[#][0-9a-fA-F]*' | sed 1q)"
+            FRAME_COLOR="$(convert "/tmp/${CURRENT}.png" -scale 50x50! -depth 8 +dither -colors 8 -format '%c' histogram:info: | sort -nr | grep -m1 -oE '[#][0-9a-fA-F]*')"
         fi
         if echo "$FRAME_COLOR" | grep -qoE '^[#][0-9a-fA-F]{1,}$'; then
             FRAME_COLOR="${FRAME_COLOR:-#434c5e}"

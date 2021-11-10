@@ -41,9 +41,9 @@ else
 fi
 
 case ${1} in
-    status) exec echo "$status"
+    status) echo "$status"
     ;;
-    icon)   exec echo "$icon"
+    icon)   echo "$icon"
     ;;
 esac
 

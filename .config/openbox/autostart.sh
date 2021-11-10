@@ -15,7 +15,8 @@
 # Start user interface and tray.
 "${VISMOD_DIR}/toggle-mode.sh" just_ui
 for EXEC_TRAY in $(echo "$CHK_TRAY"); do
-    pgrep "$EXEC_TRAY" >/dev/null 2>&1 || \
+    pgrep "$EXEC_TRAY" >/dev/null 2>&1  || \
+    [ -x "$(command -v "$EXEC_TRAY")" ] && \
     eval "\"$EXEC_TRAY\" >/dev/null 2>&1 &"
 done
 

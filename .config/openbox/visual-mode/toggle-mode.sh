@@ -3,6 +3,9 @@
 # ~/.config/openbox/visual-mode/toggle-mode.sh: Toggle visual mode, minimal mode, or restart user interface.
 # aHR0cHM6Ly9naXRodWIuY29tL293bDRjZS9kb3RmaWxlcwo=
 
+# Speeds up script execution, then restore UTF-8 before launching apps.
+OLD_LANG="$LANG"; export LC_ALL=POSIX LANG=POSIX
+
 # Load Joyful Desktop environment variables.
 . "${HOME}/.joyful_desktop"
 
@@ -26,7 +29,9 @@ start_ui()
 {
     # Kill tint2 panel and dunst notification daemon.
     killall tint2 dunst
-
+    
+    unset LC_ALL; export LANG="$OLD_LANG"
+    
     case ${1} in
         minimal) # Switch minimal mode.
                  start_ui "$CHK_VISMOD" "$([ -n "$CHK_MINMOD" ] || echo 'minimal')"
@@ -45,7 +50,8 @@ start_ui()
                  { [ "$CHK_VISMOD" != 'eyecandy' ] && echo 'eyecandy'; })" "$CHK_MINMOD"
                  # Run all user's tray.
                  for EXEC_TRAY in $(echo "$CHK_TRAY"); do
-                     pgrep "$EXEC_TRAY" >/dev/null 2>&1 || \
+                     pgrep "$EXEC_TRAY" >/dev/null 2>&1  || \
+                     [ -x "$(command -v "$EXEC_TRAY")" ] && \
                      eval "\"$EXEC_TRAY\" >/dev/null 2>&1 &"
                  done
         ;;

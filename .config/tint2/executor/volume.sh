@@ -12,7 +12,7 @@ export LC_ALL=POSIX LANG=POSIX
 # Ensure `amixer` already installed.
 command -v amixer >/dev/null 2>&1 || exec echo 'Install `alsa-utils`!'
 
-VOLUME="$(amixer get Master | grep -o '[0-9]*%' | sed 1q)"
+VOLUME="$(amixer get Master | grep -m1 -o '[0-9]*%')"
 
 icon()
 {
@@ -26,29 +26,21 @@ icon()
         icon=''
     fi
     
-    exec echo "$icon"
+    echo "$icon"
 }
 
 case ${1} in
-    percent) if amixer get Master | grep -Fqo 'off'; then
-                 exec echo 'Muted'
-             else
-                 exec echo "$VOLUME"
-             fi
+    percent) amixer get Master | grep -Fqo 'off' && echo 'Muted' || echo "$VOLUME"
     ;;
-    icon)    if amixer get Master | grep -Fqo 'off'; then
-                 exec echo ""
-             else
-                 icon
-             fi
+    icon)    amixer get Master | grep -Fqo 'off' && echo '' || icon
     ;;
     up)      amixer set Master on -q
-             exec amixer sset Master "${AUDIO_STEPS:-5}%+" -q
+             amixer sset Master "${AUDIO_STEPS:-5}%+" -q
     ;;
     down)    amixer set Master on -q
-             exec amixer sset Master "${AUDIO_STEPS:-5}%-" -q
+             amixer sset Master "${AUDIO_STEPS:-5}%-" -q
     ;;
-    mute)    exec amixer set Master 1+ toggle -q
+    mute)    amixer set Master 1+ toggle -q
     ;;
 esac
 

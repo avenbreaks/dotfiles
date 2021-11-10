@@ -14,17 +14,17 @@ case ${1} in
            if [ "$CHK_OB_BUTTON_LOC" != 'left' ]; then
                sed -i '/<titleLayout>/s|>.*<|>CIML<|' "$OB_CONFIG"
                # Write current Openbox button location to configuration.
-               sed -i "/ob_button_location$([ -z "$CHK_MINMOD" ] || echo '.minimal') /s|\".*\"|\"left\"|" "$THEME_FILE"
+               sed -i "/ob_button_location${DOTMINMOD} /s|\".*\"|\"left\"|" "$THEME_FILE"
            elif [ "$CHK_OB_BUTTON_LOC" != 'right' ]; then
                sed -i '/<titleLayout>/s|>.*<|>LIMC<|' "$OB_CONFIG"
                # Write current Openbox button location to configuration.
-               sed -i "/ob_button_location$([ -z "$CHK_MINMOD" ] || echo '.minimal') /s|\".*\"|\"right\"|" "$THEME_FILE"
+               sed -i "/ob_button_location${DOTMINMOD} /s|\".*\"|\"right\"|" "$THEME_FILE"
            fi
            # Reconfigure Openbox.
            exec openbox --reconfigure
     ;;
     decor) # Toggle Openbox decorations.
-           DECOR_LINE="$(($(cat -n "$OB_CONFIG" | grep -F '<application class="*" type="normal">' | grep -oE '[0-9]+')+1))"
+           DECOR_LINE="$(($(grep -m1 -Fno '<application class="*" type="normal">' "$OB_CONFIG" | grep -oE '[0-9]+')+1))"
            if cat -n "$OB_CONFIG" | grep -Fqo "${DECOR_LINE}	        <decor>yes</decor>"; then
                sed -i "${DECOR_LINE}s|<decor>.*</decor>|<decor>no</decor>|" "$OB_CONFIG"
            elif cat -n "$OB_CONFIG" | grep -Fqo "${DECOR_LINE}	        <decor>no</decor>"; then
@@ -35,7 +35,7 @@ case ${1} in
     ;;
     *)     # ANSI color codes.
            RB='\033[0m\033[5;31m' BB='\033[0m\033[5;34m' W='\033[1;37m' NC='\033[0m' m='\033[0;35m' g='\033[0;32m'
-           # Parse modes in order to capitalize words.
+           # Parse modes in order to uppercase words.
            GUESS_MODE="$([ -z "$CHK_MINMOD" ] || echo 'MINIMAL ')$(echo "$CHK_VISMOD" | tr '[:lower:]' '[:upper:]')"
            # Select Openbox button-style per modes.
            printf "${W}AVAILABLE OPENBOX BUTTON-STYLE FOR ${GUESS_MODE} THEME:${NC}\n"
@@ -58,7 +58,7 @@ case ${1} in
                # Reconfigure Openbox.
                openbox --reconfigure
                # Write current Openbox button-style to configuration.
-               sed -i "/ob_button_style$([ -z "$CHK_MINMOD" ] || echo '.minimal') /s|\".*\"|\"${BUTTON##*/}\"|" "$THEME_FILE"
+               sed -i "/ob_button_style${DOTMINMOD} /s|\".*\"|\"${BUTTON##*/}\"|" "$THEME_FILE"
            fi
     ;;
 esac

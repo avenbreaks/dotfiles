@@ -3,6 +3,9 @@
 # ~/.config/openbox/visual-mode/toggle-orientation.sh: Toggle user interface orientation.
 # aHR0cHM6Ly9naXRodWIuY29tL293bDRjZS9kb3RmaWxlcwo=
 
+# Speeds up script execution, then restore UTF-8 before launching apps.
+OLD_LANG="$LANG"; export LC_ALL=POSIX LANG=POSIX
+
 # Load Joyful Desktop environment variables.
 . "${HOME}/.joyful_desktop"
 
@@ -67,6 +70,7 @@ esac
 
 # Reconfigure Openbox then partially restart user interface.
 openbox --reconfigure
+unset LC_ALL; export LANG="$OLD_LANG"
 exec "${VISMOD_DIR}/UI.sh" partially >/dev/null 2>&1
 
 exit ${?}
