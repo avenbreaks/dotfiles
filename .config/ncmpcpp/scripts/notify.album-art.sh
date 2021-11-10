@@ -9,8 +9,8 @@ export LC_ALL=POSIX LANG=POSIX
 # Load Joyful Desktop environment variables.
 . "${HOME}/.joyful_desktop"
 
-# Ensure `mpd`, `mpc`, and imagemagick `convert` already installed.
-{ command -v mpd && command -v mpc && command -v convert; } >/dev/null 2>&1 || exit 1
+# Ensure `mpd`, `mpc`, and imagemagick `magick` already installed.
+{ command -v mpd && command -v mpc && command -v magick; } >/dev/null 2>&1 || exit 1
 
 # Alias `mpc` to port 7777.
 alias mpc="mpc -p ${MPD_PORT}"
@@ -34,10 +34,8 @@ alias mpc="mpc -p ${MPD_PORT}"
     
     if [ -n "$SOURCE" ]; then
         [ ! -f "$COVER_PNG" ] || rm -f "$COVER_PNG"
-        # Resize image width to 160px and round corners with imagemagick.
-        convert "$SOURCE" -resize 160x \( +clone -alpha extract -draw 'fill black polygon 0,0 0,8 8,0 fill white circle 8,8 8,0' \
-        \( +clone -flip \) -compose Multiply -composite \( +clone -flop \) -compose Multiply -composite \) -alpha off -compose   \
-        CopyOpacity -composite "$COVER_PNG"
+        # Scale image width to 160px with rounded corners and compress using imagemagick.
+        magick "$SOURCE" -strip -interlace Plane -sampling-factor 4:2:0 -scale 160x \( -clone 0 -alpha extract -draw 'fill black polygon 0,0 0,8 8,0 fill white circle 8,8 8,0' \( -clone 0 -flip \) -compose Multiply -composite \( -clone 0 -flop \) -compose Multiply -composite \) -alpha off -compose CopyOpacity -composite -quality 85% "$COVER_PNG"
         if [ -f "$COVER_PNG" ]; then
             notify-send.sh -r 78 -i "$COVER_PNG" '' "<span size='small'>$(mpc --format '%artist%' current)</span>\n$(mpc --format '%title%' current)"
         fi

@@ -11,8 +11,8 @@ export LC_ALL=POSIX LANG=POSIX
 
 case ${1} in
     generate) (
-                  # Ensure imagemagick `identify` and `convert` already installed.
-                  command -v identify && command -v convert || exec notify-send.sh -u low -r 81 'Install `imagemagick`!'
+                  # Ensure imagemagick `identify` and `magick` already installed.
+                  command -v identify && command -v magick || exec notify-send.sh -u low -r 81 'Install `imagemagick`!'
                   # Generate wallapaper (colorized) from "~/.wallpapers/*.*".
                   cd "$WALLPAPER_RAW_DIR"
                   for RAW in *.*; do
@@ -46,16 +46,12 @@ case ${1} in
                           fi
                           # Now convert.
                           if [ "$CHK_VISMOD" = 'mechanical' ]; then
-                              convert "$RAW" -gravity center -crop 16:9 \( +clone -fill '#4c566a' -colorize 50% \) -gravity center   \
-                              -compose lighten -composite \( +clone -fill '#4c566a' -colorize 20% \) -gravity center -compose darken \
-                              -composite -quality 100% "${WALLPAPER_DIR}/${RAW%%.*}${SIZE}.jpg" || exit ${?}
+                              magick "$RAW" -gravity center -crop 16:9 \( -clone 0 -fill '#4c566a' -colorize 50% \) -gravity center -compose lighten -composite \( -clone 0 -fill '#4c566a' -colorize 20% \) -gravity center -compose darken -composite -quality 100% "${WALLPAPER_DIR}/${RAW%%.*}${SIZE}.jpg" || exit ${?}
                           elif [ "$CHK_VISMOD" = 'eyecandy' ]; then
-                              convert "$RAW" -gravity center -crop 16:9 \( +clone -fill white -colorize 20% -modulate 100,127,97 \)  \
-                              -fill black -colorize 2.2% -gravity center -compose lighten -composite -quality 100%                   \
-                              "${WALLPAPER_DIR}/${RAW%%.*}${SIZE}.jpg" || exit ${?}
+                              magick "$RAW" -gravity center -crop 16:9 \( -clone 0 -fill white -colorize 20% -modulate 100,127,97 \) -fill black -colorize 2.2% -gravity center -compose lighten -composite -quality 100% "${WALLPAPER_DIR}/${RAW%%.*}${SIZE}.jpg" || exit ${?}
                           fi
                           # Send successful notification.
-                          exec notify-send.sh -u low -r 81 -i "$WALLPAPER_ICON" '' 'Successfuly generated!\nNow change the wallpaper!'
+                          exec notify-send.sh -u low -r 81 -i "$WALLPAPER_ICON" '' "Successfuly generated!\n<span size='small'>Now change the wallpaper!</span>"
                       elif [ -d "$RAW" ]; then
                           shift
                       else

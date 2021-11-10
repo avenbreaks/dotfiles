@@ -76,8 +76,8 @@ pixbuf()
     
     if [ -n "$SOURCE" ]; then
         [ ! -f "$COVER_JPG" ] || rm -f "$COVER_JPG"
-        # Resize image width to 500px with ffmpeg or imagemagick, imagemagick as fallback.
-        ffmpeg -i "$SOURCE" -vf scale=500:500 "$COVER_JPG" || convert "$SOURCE" -resize 500x "$COVER_JPG"
+        # Scale image width to 500px and compress using ffmpeg or imagemagick, imagemagick as fallback.
+        ffmpeg -i "$SOURCE" -vf scale=500:500 -crf 0 "$COVER_JPG" || magick "$SOURCE" -strip -interlace Plane -sampling-factor 4:2:0 -scale 500x -quality 85% "$COVER_JPG"
         if [ -f "$COVER_JPG" ]; then
             "$NCMPCPP_ALBUMART_BACKEND"
         fi

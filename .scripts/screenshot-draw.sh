@@ -28,7 +28,7 @@ command -v scrot >/dev/null 2>&1 || exec notify-send.sh -u low -r 74 'Install `s
     
     if [ "$ENABLE_FRAME" = 'yes' ]; then
         if [ "$FRAME_COLOR" = 'auto' ]; then
-            FRAME_COLOR="$(convert "/tmp/${CURRENT}.png" -scale 50x50! -depth 8 +dither -colors 8 -format '%c' histogram:info: | sort -nr | grep -m1 -oE '[#][0-9a-fA-F]*')"
+            FRAME_COLOR="$(magick "/tmp/${CURRENT}.png" -strip -scale 50x50! -depth 8 +dither -colors 8 -format '%c' histogram:info: | sort -nr | grep -m1 -oE '[#][0-9a-fA-F]*')"
         fi
         if echo "$FRAME_COLOR" | grep -qoE '^[#][0-9a-fA-F]{1,}$'; then
             FRAME_COLOR="${FRAME_COLOR:-#434c5e}"
@@ -36,15 +36,10 @@ command -v scrot >/dev/null 2>&1 || exec notify-send.sh -u low -r 74 'Install `s
             notify-send.sh -u low -r 74 -i "$SCREENSHOT_ICON" '' "Screenshot failed!\n<span size='small'><u>${FRAME_COLOR}</u> isn't hexadecimal!</span>"
             exec rm -f "/tmp/${CURRENT}.png"
         fi
-        eval "sleep .75s && notify-send.sh -r 74 -t 750 -i \"$SCREENSHOT_ICON\" '' \"Applying ${FRAME_COLOR} ..\" &"
-        convert "/tmp/${CURRENT}.png" \( +clone -alpha extract -draw 'fill black polygon 0,0 0,8 8,0 fill white circle 8,8 8,0' \
-        \( +clone -flip \) -compose Multiply -composite \( +clone -flop \) -compose Multiply -composite \) -alpha off -compose  \
-        CopyOpacity -composite "/tmp/${CURRENT}-rounded.png" && rm -f "/tmp/${CURRENT}.png" || exit ${?}
-        convert "/tmp/${CURRENT}-rounded.png" \( +clone -background black -shadow                                               \
-        "${FRAMED_SHADOW_OPACITY:-25}x${FRAME_PADDING:-10}+0+$(echo "${FRAME_PADDING:-10}/2" | bc)" \) +swap -background none   \
-        -layers merge +repage "/tmp/${CURRENT}-shadow.png" && rm -f "/tmp/${CURRENT}-rounded.png" || exit ${?}
-        convert "/tmp/${CURRENT}-shadow.png" -bordercolor "$FRAME_COLOR"                                                        \
-        -border 5 "/tmp/${CURRENT}.png" && rm -f "/tmp/${CURRENT}-shadow.png" || exit ${?}
+        { sleep .75s && notify-send.sh -r 74 -t 750 -i "$SCREENSHOT_ICON" '' "Applying ${FRAME_COLOR} .."; } &
+        # Convert (then delete the source) into rounded corners, then add shadows and border using imagemagick through miff-stream pipelines.
+        magick ephemeral:"/tmp/${CURRENT}.png" \( -clone 0 -alpha extract -draw 'fill black polygon 0,0 0,8 8,0 fill white circle 8,8 8,0' \( -clone 0 -flip \) -compose Multiply -composite \( -clone 0 -flop \) -compose Multiply -composite \) -alpha off -compose CopyOpacity -composite -quality 100% miff:- | magick - \( -clone 0 -background black -shadow "${FRAMED_SHADOW_OPACITY:-25}x${FRAME_PADDING:-10}+0+$(echo "${FRAME_PADDING:-10}/2" | bc)" \) +swap -background none -layers merge +repage -quality 100% miff:- | magick - -bordercolor "$FRAME_COLOR" -border 5 -quality 100% "/tmp/${CURRENT}.png" || \
+        { sleep .75s && exec notify-send.sh -u low -r 74 -i "$SCREENSHOT_ICON" '' "Screenshot failed!\n<span size='small'>Errors when processing image with \`imagemagick\`!</span>"; }
     fi
     
     while :; do
