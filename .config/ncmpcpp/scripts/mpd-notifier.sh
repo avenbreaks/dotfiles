@@ -12,10 +12,6 @@ export LC_ALL=POSIX LANG=POSIX
 # Ensure `mpd` and `mpc` already installed.
 { command -v mpd && command -v mpc; } >/dev/null 2>&1 || exit 1
 
-# Alias `mpc` to port 7777.
-[ -z "$BASH" ] || shopt -s expand_aliases
-alias mpc="mpc -p ${MPD_PORT}"
-
 {
     # Kill MPD if already running.
     ! pgrep 'mpd' || mpd --kill || killall -9 mpd
@@ -25,9 +21,9 @@ alias mpc="mpc -p ${MPD_PORT}"
     
     # Loop `mpc idle`, then send notification.
     while :; do
-        OLD_TRACK="$(mpc current)"
-        nice -n 19 mpc idle || mpc idle || break
-        [ "$OLD_TRACK" = "$(mpc current)" ] || "$MPD_ALBUMART_NOTIFIER"
+        OLD_TRACK="$(mpc -p "$MPD_PORT" current)"
+        nice -n 19 mpc -p "$MPD_PORT" idle || mpc -p "$MPD_PORT" idle || break
+        [ "$OLD_TRACK" = "$(mpc -p "$MPD_PORT" current)" ] || "$MPD_ALBUMART_NOTIFIER"
     done
     
 } >/dev/null 2>&1 &

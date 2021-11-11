@@ -12,10 +12,6 @@ export LC_ALL=POSIX LANG=POSIX
 # Ensure `mpd` and `mpc` already installed.
 { command -v mpd && command -v mpc; } >/dev/null 2>&1 || exit 1
 
-# Alias `mpc` to port 7777.
-[ -z "$BASH" ] || shopt -s expand_aliases
-alias mpc="mpc -p ${MPD_PORT}"
-
 w3m()
 {
     [ "$1" != 'clear' ] || exit ${?}
@@ -63,8 +59,8 @@ pixbuf()
 {
     COVER_JPG="$NCMPCPP_COVER"
     
-    ALBUM="$(mpc --format '%album%' current)"
-    FILE="$(mpc --format '%file%' current)"
+    ALBUM="$(mpc -p "$MPD_PORT" --format '%album%' current)"
+    FILE="$(mpc -p "$MPD_PORT" --format '%file%' current)"
     
     ALBUM_DIR="${FILE%/*}"
     
